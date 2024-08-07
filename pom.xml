@@ -25,6 +25,11 @@
         <module>6-0-test-driven-development</module>
         <module>java-fundamentals-util</module>
         <module>lesson-demo</module>
+        <module>7-0-iterators</module>
+        <module>7-0-iterators/7-0-1-BussinessDaysIterator</module>
+        <module>7-0-iterators/7-0-2-BufferingIterator</module>
+        <module>7-0-iterators/7-0-3-FlatteningIterator</module>
+        <module>7-0-iterators/7-0-4-ZippingIterator</module>
     </modules>
 
     <dependencies>

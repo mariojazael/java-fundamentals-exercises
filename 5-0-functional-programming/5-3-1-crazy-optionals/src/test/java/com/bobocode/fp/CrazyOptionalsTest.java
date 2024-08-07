@@ -31,7 +31,6 @@ class CrazyOptionalsTest {
     @Order(1)
     void optionalOfStringShouldAcceptNull() {
         Optional<String> optionalString = CrazyOptionals.optionalOfString(null);
-
         assertEquals(Optional.empty(), optionalString);
     }
 

@@ -24,7 +24,8 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
  * @author Taras Boychuk
  */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class PrimeNumbersTest {
+class
+PrimeNumbersTest {
 
     @Order(1)
     @Test

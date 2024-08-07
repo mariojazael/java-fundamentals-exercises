@@ -2,6 +2,11 @@ package com.bobocode.se;
 
 import com.bobocode.util.ExerciseNotCompletedException;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -21,7 +26,7 @@ public class CrazyRegex {
      * @return a pattern that looks for the word "Curiosity"
      */
     public Pattern findSpecificWord() {
-        throw new ExerciseNotCompletedException();
+        return Pattern.compile("Curiosity");
     }
 
     /**
@@ -30,7 +35,7 @@ public class CrazyRegex {
      * @return a pattern that looks for the first word in text
      */
     public Pattern findFirstWord() {
-        throw new ExerciseNotCompletedException();
+        return Pattern.compile("^\\w+");
     }
 
     /**
@@ -39,7 +44,7 @@ public class CrazyRegex {
      * @return a pattern that looks for the last word in text
      */
     public Pattern findLastWord() {
-        throw new ExerciseNotCompletedException();
+        return Pattern.compile("\\w+$");
     }
 
     /**
@@ -50,7 +55,7 @@ public class CrazyRegex {
      * @return a pattern that looks for numbers
      */
     public Pattern findAllNumbers() {
-        throw new ExerciseNotCompletedException();
+        return Pattern.compile("\\d+");
     }
 
     /**
@@ -59,7 +64,7 @@ public class CrazyRegex {
      * @return a pattern that looks for dates
      */
     public Pattern findDates() {
-        throw new ExerciseNotCompletedException();
+        return Pattern.compile("\\d{4}-\\d{2}-\\d{2}");
     }
 
     /**
@@ -69,7 +74,7 @@ public class CrazyRegex {
      * @return a pattern that looks for different variations of word "color"
      */
     public Pattern findDifferentSpellingsOfColor() {
-        throw new ExerciseNotCompletedException();
+        return Pattern.compile("colo[ur][rs]s?");
     }
 
     /**
@@ -80,7 +85,7 @@ public class CrazyRegex {
      * @return a pattern that looks for zip codes
      */
     public Pattern findZipCodes() {
-        throw new ExerciseNotCompletedException();
+        return Pattern.compile(" \\d{5} ");
     }
 
     /**
@@ -90,7 +95,7 @@ public class CrazyRegex {
      * @return a pattern that looks for different variations of word "link"
      */
     public Pattern findDifferentSpellingsOfLink() {
-        throw new ExerciseNotCompletedException();
+        return Pattern.compile("l[yi( ]nk");
     }
 
     /**
@@ -100,7 +105,7 @@ public class CrazyRegex {
      * @return a pattern that looks for phone numbers
      */
     public Pattern findSimplePhoneNumber() {
-        throw new ExerciseNotCompletedException();
+        return Pattern.compile("(\\d{3}-\\d{3}-\\d{4})");
     }
 
     /**
@@ -111,7 +116,7 @@ public class CrazyRegex {
      * @return a pattern that looks for numbers with length 3 and digits from 0 to 5 in the middle
      */
     public Pattern findNumbersFromZeroToFiveWithLengthThree() {
-        throw new ExerciseNotCompletedException();
+        return Pattern.compile("[0-5][0-5][0-5]");
     }
 
     /**
@@ -120,7 +125,7 @@ public class CrazyRegex {
      * @return a pattern that looks for the words that have length 5
      */
     public Pattern findAllWordsWithFiveLength() {
-        throw new ExerciseNotCompletedException();
+        return Pattern.compile("\\b[A-Za-z]{5}\\b");
     }
 
     /**
@@ -131,7 +136,7 @@ public class CrazyRegex {
      * @return a pattern that looks for words and numbers that not shorter 2 and not longer 3
      */
     public Pattern findAllLettersAndDigitsWithLengthThree() {
-        throw new ExerciseNotCompletedException();
+        return Pattern.compile("\\b[0-9a-zA-Z][0-9a-zA-Z][0-9a-zA-Z]?\\b");
     }
 
     /**
@@ -140,7 +145,7 @@ public class CrazyRegex {
      * @return a pattern that looks for the words that begin with capital letter
      */
     public Pattern findAllWordsWhichBeginWithCapitalLetter() {
-        throw new ExerciseNotCompletedException();
+        return Pattern.compile("\\b[A-Z][a-z]+\\b");
     }
 
     /**
@@ -150,7 +155,7 @@ public class CrazyRegex {
      * @return a pattern that looks for the abbreviations above
      */
     public Pattern findAbbreviation() {
-        throw new ExerciseNotCompletedException();
+        return Pattern.compile("[ACP][KLRZAOTD]");
     }
 
     /**
@@ -159,7 +164,7 @@ public class CrazyRegex {
      * @return a pattern that looks for all open braces
      */
     public Pattern findAllOpenBraces() {
-        throw new ExerciseNotCompletedException();
+        return Pattern.compile("\\{+");
     }
 
     /**
@@ -168,7 +173,7 @@ public class CrazyRegex {
      * @return a pattern that looks for everything inside []
      */
     public Pattern findOnlyResources() {
-        throw new ExerciseNotCompletedException();
+        return Pattern.compile("(?<=\\[)\\w+(?=])");
     }
 
     /**
@@ -177,7 +182,7 @@ public class CrazyRegex {
      * @return a pattern that looks for all https links in note.txt
      */
     public Pattern findOnlyLinksInNote() {
-        throw new ExerciseNotCompletedException();
+        return Pattern.compile("https://\\w+\\.(\\w+\\.)?com");
     }
 
     /**
@@ -186,7 +191,7 @@ public class CrazyRegex {
      * @return a pattern that looks for all http links in nasa.json
      */
     public Pattern findOnlyLinksInJson() {
-        throw new ExerciseNotCompletedException();
+        return Pattern.compile("http://[\\w./_-]+");
     }
 
     /**
@@ -195,7 +200,7 @@ public class CrazyRegex {
      * @return a pattern that looks for all .com, .net and .edu emails
      */
     public Pattern findAllEmails() {
-        throw new ExerciseNotCompletedException();
+        return Pattern.compile("[\\w.]+@\\w+\\.(com|net|edu)");
     }
 
     /**
@@ -207,7 +212,7 @@ public class CrazyRegex {
      * @return a pattern that looks for phone numbers patterns above
      */
     public Pattern findAllPatternsForPhoneNumbers() {
-        throw new ExerciseNotCompletedException();
+        return Pattern.compile("[(]?\\d{3}[.\\-)]\\d{3}[.\\-]\\d{4}");
     }
 
     /**
@@ -216,7 +221,7 @@ public class CrazyRegex {
      * @return a pattern that looks for duplicates
      */
     public Pattern findOnlyDuplicates() {
-        throw new ExerciseNotCompletedException();
+        return Pattern.compile("\\b(\\w+)\\b\\s+\\1\\b");
     }
 
     /**
@@ -227,7 +232,26 @@ public class CrazyRegex {
      * @return String where all names recorded as last name first name
      */
     public String replaceFirstAndLastNames(String names) {
-        throw new ExerciseNotCompletedException();
+        Pattern pattern = Pattern.compile("\\b[a-zA-Z]+\\b");
+        Matcher matcher = pattern.matcher(names);
+        return switchNames(matcher);
+    }
+
+    public String switchNames(Matcher matcher) {
+        int flag = 0;
+        StringBuilder result = new StringBuilder();
+        String tempName = "";
+        while(matcher.find()) {
+            if(flag == 0) tempName = matcher.group();
+            else if(flag == 1) {
+                String lastName = matcher.group();
+                result.append(lastName).append(" ").append(tempName).append(" ... ");
+                flag = 0;
+                continue;
+            }
+            flag++;
+        }
+        return result.substring(0, result.toString().length() - 5);
     }
 
     /**
@@ -238,7 +262,29 @@ public class CrazyRegex {
      * @return String where in all phone numbers last 7 digits replaced to X
      */
     public String replaceLastSevenDigitsOfPhoneNumberToX(String phones) {
-        throw new ExerciseNotCompletedException();
+        Pattern pattern = Pattern.compile("[(]?\\d{3}[-.)]\\d{3}[-.]\\d{4}");
+        Matcher matcher = pattern.matcher(phones);
+        String result = "";
+        final String replacement = "XXX-XXXX";
+        if(matcher.find()) {
+            result = matcher.replaceAll(matchResult -> matchResult.group().replaceAll("\\d{3}[-.]\\d{4}", replacement));
+            Pattern firstPartPattern = Pattern.compile("[(]?\\d+[).]?");
+            matcher = firstPartPattern.matcher(result);
+            StringBuilder tempResult = new StringBuilder();
+            while(matcher.find()) {
+                String group = matcher.group();
+                Pattern firstDigitsPattern = Pattern.compile("\\d+");
+                Matcher firstDigitsMatcher = firstDigitsPattern.matcher(group);
+                String firstThreeDigits = "";
+                if(firstDigitsMatcher.find()) firstThreeDigits = matcher.group();
+                if(firstThreeDigits.startsWith("(")) firstThreeDigits = firstThreeDigits.substring(1, firstThreeDigits.length() - 1);
+                if(firstThreeDigits.endsWith(".")) firstThreeDigits = firstThreeDigits.substring(0, firstThreeDigits.length() - 1);
+                tempResult.append(matcher.group().replaceFirst("[(]?\\d+[).]?", firstThreeDigits + "-"));
+                tempResult.append(replacement).append(" ");
+            }
+            result = tempResult.substring(0, tempResult.toString().length() - 1);
+        }
+        return result;
     }
 
     /**
@@ -250,6 +296,22 @@ public class CrazyRegex {
      * @return String where all resources embraced in href
      */
     public String insertLinksAndResourcesIntoHref(String links) {
-        throw new ExerciseNotCompletedException();
+        Pattern urlPattern = Pattern.compile("(?<=\\().+(?=\\))");
+        Pattern namePattern = Pattern.compile("(?<=\\[).+(?=])");
+        Matcher urlMatcher = urlPattern.matcher(links);
+        Matcher nameMatcher = namePattern.matcher(links);
+        List<String> urls = new ArrayList<>();
+        Queue<String> names = new LinkedList<>();
+        while(urlMatcher.find()) {
+            urls.add(urlMatcher.group());
+        }
+        while(nameMatcher.find()) {
+            names.add(nameMatcher.group());
+        }
+        StringBuilder result = new StringBuilder();
+        for(String url : urls) {
+            result.append("<a href=\"").append(url).append("\">").append(names.poll()).append("</a>").append("\n");
+        }
+        return result.substring(0, result.toString().length() - 1);
     }
 }

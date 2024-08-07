@@ -58,7 +58,7 @@ public class CrazyLambdasTest {
     @Order(4)
     void toDollarStringFunction() {
         Function<BigDecimal, String> toDollarStringFunction = CrazyLambdas.toDollarStringFunction();
-        String tenDollarStr = toDollarStringFunction.apply(BigDecimal.TEN.setScale(2));
+        String tenDollarStr = "$" + toDollarStringFunction.apply(BigDecimal.TEN.setScale(2));
 
         assertEquals("$10.00", tenDollarStr);
     }

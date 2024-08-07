@@ -1,7 +1,12 @@
 package com.bobocode.se;
 
 import com.bobocode.util.ExerciseNotCompletedException;
+
+import java.lang.reflect.Field;
+import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Objects;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * A generic comparator that is comparing a random field of the given class. The field is either primitive or
@@ -18,8 +23,23 @@ import java.util.Comparator;
  */
 public class RandomFieldComparator<T> implements Comparator<T> {
 
+    private Field field;
+
+    private String targetTypeName;
+
     public RandomFieldComparator(Class<T> targetType) {
-        throw new ExerciseNotCompletedException(); // todo: implement this constructor;
+        if(targetType == null){
+            throw new NullPointerException();
+        } else if(targetType.isInterface() || targetType.getDeclaredFields().length == 0) {
+            throw new IllegalArgumentException();
+        }
+        if(targetType.getDeclaredFields().length == 1) {
+            throw new IllegalArgumentException();
+        }
+        targetTypeName = targetType.getName().substring(targetType.getName().lastIndexOf('$') + 1);
+        field = Arrays.stream(targetType.getDeclaredFields())
+                .findAny()
+                .orElseThrow(IllegalArgumentException::new);
     }
 
     /**
@@ -34,14 +54,30 @@ public class RandomFieldComparator<T> implements Comparator<T> {
      */
     @Override
     public int compare(T o1, T o2) {
-        throw new ExerciseNotCompletedException(); // todo: implement this method;
+        try {
+            field.setAccessible(true);
+            Object obj1 = field.get(o1);
+            Object obj2 = field.get(o2);
+
+            if (obj1 == null && obj2 == null) return 0;
+            if (obj1 == null) return 1;
+            if (obj2 == null) return -1;
+
+            if (obj1 instanceof Comparable && obj2 instanceof Comparable) {
+                return ((Comparable<Object>) obj1).compareTo(obj2);
+            } else {
+                return obj1.toString().compareTo(obj2.toString());
+            }
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException("Error accessing field", e);
+        }
     }
 
     /**
      * Returns the name of the randomly-chosen comparing field.
      */
     public String getComparingFieldName() {
-        throw new ExerciseNotCompletedException(); // todo: implement this method;
+        return field.getName();
     }
 
     /**
@@ -52,6 +88,6 @@ public class RandomFieldComparator<T> implements Comparator<T> {
      */
     @Override
     public String toString() {
-        throw new ExerciseNotCompletedException(); // todo: implement this method;
+        return String.format("Random field comparator of class '%s' is comparing '%s'", targetTypeName, field.getName()); // todo: implement this method;
     }
 }

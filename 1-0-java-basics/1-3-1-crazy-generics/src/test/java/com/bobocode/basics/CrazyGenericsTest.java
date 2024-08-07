@@ -187,6 +187,8 @@ public class CrazyGenericsTest {
         var typeParam = typeParameters[0];
         var boundType = typeParam.getBounds()[0];
 
+        System.out.println(boundType.getTypeName());
+
         var expectedBoundTypeName = String.format("%s<? super %s>", Comparable.class.getTypeName(), TYPE_PARAMETER_NAME);
         assertThat(boundType.getTypeName()).isEqualTo(expectedBoundTypeName);
     }

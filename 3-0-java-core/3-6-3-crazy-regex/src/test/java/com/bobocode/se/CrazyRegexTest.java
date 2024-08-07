@@ -227,7 +227,7 @@ public class CrazyRegexTest {
         Matcher matcher = pattern.matcher(str2WorkWith);
         StringBuilder stringBuilder = new StringBuilder();
         while (matcher.find()) {
-            if (matcher.group().length() != 0) {
+            if (!matcher.group().isEmpty()) {
                 stringBuilder.append("\n").append(matcher.group());
             }
         }

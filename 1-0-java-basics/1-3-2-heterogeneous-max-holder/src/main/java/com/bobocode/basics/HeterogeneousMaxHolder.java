@@ -1,6 +1,11 @@
 package com.bobocode.basics;
 
+import com.bobocode.util.ExerciseNotCompletedException;
+
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * {@link HeterogeneousMaxHolder} is a multi-type container that holds maximum values per each type. It's kind of a
@@ -15,6 +20,7 @@ import java.util.Map;
  * @author Taras Boychuk
  */
 public class HeterogeneousMaxHolder {
+    private final Map<Class<?>, Object> objects = new HashMap<>();
 
     /**
      * A method put stores a provided value by its type, if the value is greater than the current maximum. In other words, the logic
@@ -30,7 +36,25 @@ public class HeterogeneousMaxHolder {
      * @param <T>   value type parameter
      * @return a smaller value among the provided value and the current maximum
      */
-    // todo: implement a method according to javadoc
+
+    public <T extends Comparable<? super T>> T put(Class<T> type, T value) {
+        return mergeAndGetT(type, value, Comparator.naturalOrder());
+    }
+
+    @SuppressWarnings("unchecked")
+    private <T extends Comparable<? super T>> Object setAndGetValues(T biggest, Object smallest, AtomicReference<T> smallestRef) {
+        smallestRef.set((T) smallest);
+
+        return biggest;
+    }
+
+    @SuppressWarnings("unchecked")
+    private <T> Object setAndGetValues(T biggest, Object smallest, AtomicReference<T> smallestRef) {
+        smallestRef.set((T) smallest);
+
+        return biggest;
+    }
+
 
     /**
      * An overloaded method put implements the same logic using a custom comparator. A given comparator is wrapped with
@@ -44,7 +68,25 @@ public class HeterogeneousMaxHolder {
      * @param <T>        value type parameter
      * @return a smaller value among the provided value and the current maximum
      */
-    // todo: implement a method according to javadoc
+
+    public <T> T put(Class<T> type, T value, Comparator<? super T> comparator) {
+        return mergeAndGetT(type, value, comparator);
+    }
+
+    @SuppressWarnings("unchecked")
+    private <T> T mergeAndGetT(Class<T> type, T value, Comparator<? super T> comparator) {
+        AtomicReference<T> smallest = new AtomicReference<>();
+        objects.merge(
+                type,
+                value,
+                (oldValue, newValue) -> {
+                    int result = comparator.compare((T) oldValue, (T) newValue);
+                    if(result > 0) return setAndGetValues((T) oldValue, newValue, smallest);
+                    else return setAndGetValues((T) newValue, oldValue, smallest);
+                }
+        );
+        return smallest.get();
+    }
 
     /**
      * A method getMax returns a max value by the given type. If no value is stored by this type, then it returns null.
@@ -53,5 +95,9 @@ public class HeterogeneousMaxHolder {
      * @param <T> value type parameter
      * @return current max value or null
      */
-    // todo: implement a method according to javadoc
+
+    @SuppressWarnings("unchecked")
+    public <T> T getMax(Class<T> type) {
+        return (T) objects.getOrDefault(type, null);
+    }
 }

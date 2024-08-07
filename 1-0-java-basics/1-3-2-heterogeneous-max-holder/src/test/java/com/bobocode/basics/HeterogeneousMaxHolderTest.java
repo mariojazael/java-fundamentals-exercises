@@ -99,6 +99,7 @@ class HeterogeneousMaxHolderTest {
         var putMethod = getPutMethod();
 
         var typeParam = putMethod.getTypeParameters()[0];
+        System.out.println(typeParam);
         var boundType = (ParameterizedType) typeParam.getBounds()[0];
 
         assertThat(boundType.getRawType()).isEqualTo(Comparable.class);
@@ -111,6 +112,7 @@ class HeterogeneousMaxHolderTest {
         var putMethod = getPutMethod();
 
         var typeParam = putMethod.getTypeParameters()[0];
+        System.out.println(typeParam);
         var boundType = (ParameterizedType) typeParam.getBounds()[0];
         var typeArgument = boundType.getActualTypeArguments()[0].getTypeName();
 

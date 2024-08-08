@@ -7,7 +7,7 @@ import java.util.List;
 public class BufferingIterator<T> implements Iterator<List<T>> {
 
     private final Iterator<T> iterator;
-    private int bufferSize;
+    private final int bufferSize;
 
     public BufferingIterator(Iterator<T> iterator, int bufferSize) {
         this.iterator = iterator;

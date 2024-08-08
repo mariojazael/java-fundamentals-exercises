@@ -9,8 +9,8 @@ public class ZippingIterator implements Iterator<ObjectsHolder<?, ?>> {
 
     Queue<ObjectsHolder<?, ?>> queue = new LinkedList<>();
 
-    public <T, R> ZippingIterator(Iterator<T> itA, Iterator<R> itB, BiFunction<T, R, ObjectsHolder<T, R>> combinner) {
-        initQueue(itA, itB, combinner);
+    public <T, R> ZippingIterator(Iterator<T> itA, Iterator<R> itB, BiFunction<T, R, ObjectsHolder<T, R>> combiner) {
+        initQueue(itA, itB, combiner);
     }
 
     @Override
@@ -23,9 +23,9 @@ public class ZippingIterator implements Iterator<ObjectsHolder<?, ?>> {
         return queue.remove();
     }
 
-    private <T, R> void initQueue(Iterator<T> itA, Iterator<R> itB, BiFunction<T, R, ObjectsHolder<T, R>> combinner) {
+    private <T, R> void initQueue(Iterator<T> itA, Iterator<R> itB, BiFunction<T, R, ObjectsHolder<T, R>> combiner) {
         while (itA.hasNext() && itB.hasNext()) {
-            queue.add(combinner.apply(itA.next(), itB.next()));
+            queue.add(combiner.apply(itA.next(), itB.next()));
         }
     }
 }
